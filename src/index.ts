@@ -1,19 +1,13 @@
-import express, { Application, Request, Response } from 'express';
-import { load } from 'ts-dotenv';
-const env = load({
-  PORT: Number,
+import express from "express";
+
+const app = express();
+
+const port = process.env.PORT || 8080; // port番号を指定
+
+app.post("/webhook", (req, res) => {
+  res.send("準備中");
 });
 
-const PORT = env.PORT || 3000;
+app.listen(port);
 
-const app: Application = express();
-
-app.get('/', async (_: Request, res: Response): Promise<Response> => {
-  return res.status(200).send({
-    message: 'Hello World!',
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}/`);
-});
+console.log("listen on port " + port);
