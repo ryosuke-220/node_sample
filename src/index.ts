@@ -65,7 +65,6 @@ app.post(
   '/webhook',
   middleware(middlewareConfig),
   async (req: Request, res: Response): Promise<Response> => {
-    res.status(200).end();
     const events: WebhookEvent[] = req.body.events;
 
     // 受信したすべてのイベントを非同期で処理
