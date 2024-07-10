@@ -1,13 +1,75 @@
-import express from "express";
-
-const app = express();
-
-const port = process.env.PORT || 8080; // port番号を指定
-
-app.post("/webhook", (req, res) => {
-  res.send("準備中");
+import {
+  ClientConfig,
+  Client,
+  middleware,
+  MiddlewareConfig,
+  WebhookEvent,
+  TextMessage,
+  MessageAPIResponseBase,
+} from '@line/bot-sdk';
+import express, { Application, Request, Response } from 'express';
+import { load } from 'ts-dotenv';
+const env = load({
+  CHANNEL_ACCESS_TOKEN: String,
+  CHANNEL_SECRET: String,
+  PORT: Number,
 });
 
-app.listen(port);
+const PORT = env.PORT || 80;
 
-console.log("listen on port " + port);
+const config = {
+  channelAccessToken: env.CHANNEL_ACCESS_TOKEN || '',
+  channelSecret: env.CHANNEL_SECRET || '',
+};
+const clientConfig: ClientConfig = config;
+const middlewareConfig: MiddlewareConfig = config;
+const client = new Client(clientConfig); //①
+
+const app: Application = express(); //②
+
+app.get('/', async (_: Request, res: Response): Promise<Response> => { //③
+  return res.status(200).send({
+    message: 'success',
+  });
+});
+
+const textEventHandler = async ( //④
+  event: WebhookEvent
+): Promise<MessageAPIResponseBase | undefined> => {
+  if (event.type !== 'message' || event.message.type !== 'text') {
+    return;
+  }
+
+  const { replyToken } = event;
+  const { text } = event.message;
+  const response: TextMessage = {
+    type: 'text',
+    text: text,
+  };
+  await client.replyMessage(replyToken, response);
+};
+
+app.post( //⑤
+  '/webhook',
+  middleware(middlewareConfig),
+  async (req: Request, res: Response): Promise<Response> => {
+    const events: WebhookEvent[] = req.body.events;
+    await Promise.all(
+      events.map(async (event: WebhookEvent) => {
+        try {
+          await textEventHandler(event);
+        } catch (err: unknown) {
+          if (err instanceof Error) {
+            console.error(err);
+          }
+          return res.status(500);
+        }
+      })
+    );
+    return res.status(200);
+  }
+);
+
+app.listen(PORT, () => { //⑥
+  console.log(`http://localhost:${PORT}/`);
+});
