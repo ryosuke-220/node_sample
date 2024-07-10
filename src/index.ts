@@ -1,60 +1,74 @@
-import {
-  ClientConfig,
-  Client,
-  middleware,
-  MiddlewareConfig,
-  WebhookEvent,
-  TextMessage,
-  MessageAPIResponseBase,
-} from '@line/bot-sdk';
-import express, { Application, Request, Response } from 'express';
-import { load } from 'ts-dotenv';
-const env = load({
-  CHANNEL_ACCESS_TOKEN: String,
-  CHANNEL_SECRET: String,
-  PORT: Number,
-});
+// すべての依存関係をインポートし、見やすくするために構造化
+import { ClientConfig, Client, middleware, MiddlewareConfig, WebhookEvent, TextMessage, MessageAPIResponseBase } from '@line/bot-sdk';
+import { Application, Request, Response } from 'express';
+import express = require('express');
+require('dotenv').config();
 
-const PORT = env.PORT || 80;
-
-const config = {
-  channelAccessToken: env.CHANNEL_ACCESS_TOKEN || '',
-  channelSecret: env.CHANNEL_SECRET || '',
+// LINEクライアントとExpressの設定を行う
+const clientConfig: ClientConfig = {
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN || '',
+  channelSecret: process.env.CHANNEL_SECRET,
 };
-const clientConfig: ClientConfig = config;
-const middlewareConfig: MiddlewareConfig = config;
-const client = new Client(clientConfig); //①
 
-const app: Application = express(); //②
+const middlewareConfig: MiddlewareConfig = {
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
+  channelSecret: process.env.CHANNEL_SECRET || '',
+};
 
-app.get('/', async (_: Request, res: Response): Promise<Response> => { //③
-  return res.status(200).send({
-    message: 'success',
-  });
-});
+const PORT = process.env.PORT || 80;
 
-const textEventHandler = async ( //④
-  event: WebhookEvent
-): Promise<MessageAPIResponseBase | undefined> => {
+// LINE SDKクライアントを新規に作成
+const client = new Client(clientConfig);
+
+// Expressアプリケーションを新規に作成
+const app: Application = express();
+
+// テキストを受け取る関数
+const textEventHandler = async (event: WebhookEvent): Promise<MessageAPIResponseBase | undefined> => {
+  // すべての変数を処理
   if (event.type !== 'message' || event.message.type !== 'text') {
     return;
   }
 
+  // メッセージに関連する変数をこちらで処理
   const { replyToken } = event;
   const { text } = event.message;
+
+  // 新規メッセージの作成
   const response: TextMessage = {
     type: 'text',
-    text: text,
+    text,
   };
+
+  // ユーザーに返信
   await client.replyMessage(replyToken, response);
 };
 
-app.post( //⑤
+// LINEミドルウェアを登録
+// ルートハンドラの中でミドルウェアを渡すことも可能↓
+// app.use(middleware(middlewareConfig));
+
+// Webhookイベントを受信する
+// 接続テストを受信
+app.get(
+  '/',
+  async (_: Request, res: Response): Promise<Response> => {
+    return res.status(200).json({
+      status: '成功',
+      message: '正常に接続されました!',
+    });
+  }
+);
+
+// Webhookに使用されるルート
+app.post(
   '/webhook',
   middleware(middlewareConfig),
   async (req: Request, res: Response): Promise<Response> => {
     const events: WebhookEvent[] = req.body.events;
-    await Promise.all(
+
+    // 受信したすべてのイベントを非同期で処理
+    const results = await Promise.all(
       events.map(async (event: WebhookEvent) => {
         try {
           await textEventHandler(event);
@@ -62,14 +76,24 @@ app.post( //⑤
           if (err instanceof Error) {
             console.error(err);
           }
-          return res.status(500);
+
+          // エラーメッセージを返す
+          return res.status(500).json({
+            status: 'エラー',
+          });
         }
       })
     );
-    return res.status(200);
+
+    // 成功した場合のメッセージを返す
+    return res.status(200).json({
+      status: '成功',
+      results,
+    });
   }
 );
 
-app.listen(PORT, () => { //⑥
+// サーバーを作成し80番ポートでlistenする
+app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}/`);
 });
