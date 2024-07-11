@@ -48,6 +48,7 @@ app.get('/', async (_, res) => {
 });
 // Webhookに使用されるルート
 app.post('/webhook', (0, bot_sdk_1.middleware)(middlewareConfig), async (req, res) => {
+    res.status(200).end(); //タイムアウトのエラー対策
     const events = req.body.events;
     // 受信したすべてのイベントを非同期で処理
     const results = await Promise.all(events.map(async (event) => {
