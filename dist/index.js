@@ -8,6 +8,7 @@ const app = express();
 
 app.set('port', (process.env.PORT || 80));
 app.post('/', linebot.middleware(config), (req, res) => {
+    res.status(200).end();
     Promise
         .all(req.body.events.map(handleEvent))
         .then(result => res.json(result));
