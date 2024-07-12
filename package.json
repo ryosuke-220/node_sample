@@ -3,16 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
-    "build:watch": "npx tsc --watch",
-<<<<<<< HEAD
-     "start": "node dist/index.js", 
-     "start:dev": "nodemon dist/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ryosuke-220/node_sample.git"
-=======
     "start": "node dist/index.js",
     "start:dev": "nodemon dist/index.js"
   },
@@ -21,7 +11,12 @@
     "url": "git+https://github.com/ryosuke-220/node_sample.git",
     "start": "node dist/index.js",
     "start:dev": "nodemon dist/index.js"
->>>>>>> 1a6b684f99eb86bd16b53e7e30b0cd34ac177ad1
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryosuke-220/node_sample.git",
+    "start": "node dist/index.js",
+    "start:dev": "nodemon dist/index.js"
   },
   "license": "ISC",
   "devDependencies": {
