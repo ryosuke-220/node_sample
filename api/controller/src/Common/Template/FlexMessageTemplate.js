@@ -1,6 +1,4 @@
-import { TemplateMessage } from '@line/bot-sdk';
-
-export const yourLocationTemplate = (): TemplateMessage => {
+exports.Template = () => {
     return {
         type: "flex",
         altText: "This is a Flex Message",
