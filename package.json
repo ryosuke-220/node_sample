@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
-    "build:watch": "npx tsc --watch",
-    "start": "node dist/index.js",
-    "start:dev": "nodemon dist/index.js"
+    "start": "node api/controller/dist/index.js",
+    "start:dev": "nodemon api/controller/dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +23,9 @@
   },
   "dependencies": {
     "@line/bot-sdk": "^9.2.2",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "express-generator": "^4.16.1"
+    "express-generator": "^4.16.1",
+    "ngrok": "^5.0.0-beta.2"
   }
 }
