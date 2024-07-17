@@ -21,18 +21,18 @@ app.get('/', (req, res) => {
 
 app.post("/webhook", line.middleware(config), (req, res) => {
     Promise
-    .all(req.body.events.map(handleEvent))
-    .then((result) => res.json(result))
-    .catch((err) => {
-      console.error(err);
-      res.status(500).end();
-    });
+        .all(req.body.events.map(handleEvent))
+        .then((result) => res.json(result))
+        .catch((err) => {
+            console.error(err);
+            res.status(500).end();
+        });
 });
 
 const client = new line.Client(config);
 
 async function handleEvent(event) {
-    
+
     if (event.type !== 'message' || event.message.type !== 'text') {
         // ignore non-text-message event
         return Promise.resolve(null);

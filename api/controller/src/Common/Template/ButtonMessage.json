@@ -1,0 +1,30 @@
+{
+    "type": "template",
+    "altText": "図書館利用案内",
+    "template": {
+        "type": "buttons",
+        "text": "学内の方向けの案内です。知りたいことをタップしてください。",
+        "actions": [
+            {
+                "type": "message",
+                "label": "開館時間【授業期間】",
+                "text": "開館時間【授業期間】"
+            },
+            {
+                "type": "message",
+                "label": "開館時間【休業期間】",
+                "text": "開館時間【休業期間】"
+            },
+            {
+                "type": "message",
+                "label": "貸出冊数と期間",
+                "text": "貸出冊数と期間"
+            },
+            {
+                "type": "message",
+                "label": "貸出期間を延長したい。",
+                "text": "貸出期間を延長したい。"
+            }
+        ]
+    }
+}
