@@ -1,0 +1,80 @@
+{
+    "type": "flex",
+    "altText": "アカウント連携",
+    "contents": {
+        "type": "bubble",
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "ヘルプ",
+                    "weight": "bold",
+                    "size": "xl",
+                    "contents": []
+                },
+                {
+                    "type": "text",
+                    "text": "アカウント連携を行うとLINEのトークルーム画面で貸出中の資料の一覧や返却期限が近い資料などが確認できるようになります。",
+                    "action": {
+                        "type": "postback",
+                        "label": "action",
+                        "text": "hello"
+                    },
+                    "wrap": true
+                },
+                {
+                    "type": "text",
+                    "text": "下記リンク先からMyLibraryにログインすることで連携できます。",
+                    "action": {
+                        "type": "postback",
+                        "label": "action",
+                        "text": "hello"
+                    },
+                    "wrap": true
+                },
+                {
+                    "type": "text",
+                    "text": "アカウント連携完了後はもう一度「MyLibrary」をタップするとメニューが開きます。",
+                    "action": {
+                        "type": "",
+                        "label": "action",
+                        "text": "hello"
+                    },
+                    "wrap": true
+                }
+            ]
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "button",
+                    "text": "このアカウントで何ができる？",
+                    "wrap": true,
+                    "action": {
+                        "type": "postback",
+                        "label": "このアカウントで何ができる？",
+                        "text": "このアカウントで何ができる？"
+                    },
+                    "color": "#42659a",
+                    "margin": "10px"
+                },
+                {
+                    "type": "button",
+                    "text": "書籍の検索方法が知りたい",
+                    "color": "#42659a",
+                    "action": {
+                        "type": "postback",
+                        "label": "書籍の検索方法が知りたい",
+                        "text": "書籍の検索方法が知りたい"
+                    },
+                    "margin": "10px"
+                }
+            ],
+            "paddingTop": "0px"
+        }
+    }
+}

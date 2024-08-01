@@ -18,7 +18,7 @@
                     "type": "text",
                     "text": "学内の方向けの案内です。知りたいことをタップしてください。",
                     "action": {
-                        "type": "message",
+                        "type": "postback",
                         "label": "action",
                         "text": "hello"
                     },
@@ -35,7 +35,7 @@
                     "text": "開館時間【授業期間】",
                     "wrap": true,
                     "action": {
-                        "type": "message",
+                        "type": "postback",
                         "label": "開館時間【授業期間】",
                         "text": "開館時間【授業期間】"
                     },
@@ -47,7 +47,7 @@
                     "text": "開館時間【休業期間】",
                     "color": "#42659a",
                     "action": {
-                        "type": "message",
+                        "type": "postback",
                         "label": "開館時間【休業期間】",
                         "text": "開館時間【休業期間】"
                     },
@@ -58,7 +58,7 @@
                     "text": "貸出冊数と期間",
                     "color": "#42659a",
                     "action": {
-                        "type": "message",
+                        "type": "postback",
                         "label": "貸出冊数と期間",
                         "text": "貸出冊数と期間"
                     },
@@ -69,7 +69,7 @@
                     "text": "貸出期間を延長したい。",
                     "color": "#42659a",
                     "action": {
-                        "type": "message",
+                        "type": "postback",
                         "label": "貸出期間を延長したい。",
                         "text": "貸出期間を延長したい。"
                     },
@@ -79,7 +79,7 @@
                     "type": "text",
                     "text": "資料の予約をしたい。",
                     "action": {
-                        "type": "message",
+                        "type": "postback",
                         "label": "資料の予約をしたい。",
                         "text": "資料の予約をしたい。"
                     },
@@ -90,7 +90,7 @@
                     "type": "text",
                     "text": "その他の利用案内を知りたい。",
                     "action": {
-                        "type": "message",
+                        "type": "postback",
                         "label": "その他の利用案内を知りたい。",
                         "text": "その他の利用案内を知りたい。"
                     },
