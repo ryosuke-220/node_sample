@@ -4,7 +4,7 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 require("dotenv").config();
 
-const ButtonOrErrorMessage = require('../src/Common/Send/ButtonOnErrorMessage.js');
+const ButtonOrErrorMessage = require('../src/Common/Send/ButtonMessage.js');
 
 const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
