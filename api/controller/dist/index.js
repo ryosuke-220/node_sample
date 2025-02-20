@@ -4,7 +4,7 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 require("dotenv").config();
 
-const SendrMessage = require('../src/Common/Send/SendMessage.js');
+const SendMessage = require('../src/Common/Send/SendMessage.js');
 
 const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
