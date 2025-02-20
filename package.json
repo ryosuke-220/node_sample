@@ -8,9 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryosuke-220/node_sample.git",
-    "start": "api/controller/dist/index.js",
-    "start:dev": "nodemon api/controller/dist/index.js"
+    "url": "git+https://github.com/ryosuke-220/node_sample.git"
   },
   "license": "ISC",
   "devDependencies": {
