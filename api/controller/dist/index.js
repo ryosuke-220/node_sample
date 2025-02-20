@@ -4,7 +4,7 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 require("dotenv").config();
 
-const ButtonOrErrorMessage = require('../src/Common/Send/ButtonMessage.js');
+const SendrMessage = require('../src/Common/Send/SendMessage.js');
 
 const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
@@ -37,7 +37,7 @@ async function handleEvent(event) {
         // ignore non-text-message event
         return Promise.resolve(null);
     } else if (event.message.type === 'text') {
-        await ButtonOrErrorMessage.SendMessage(client, event);
+        await SendMessage.SendMessage(client, event);
     }
 }
 
