@@ -1,61 +1,65 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-// CSVファイルのパス
 const csvFilePath = 'data.csv';
 
-// CSVを読み込んでFlexメッセージを生成
 function generateFlexMessage() {
-  const buttons = [];
+  return new Promise((resolve, reject) => {
+    const buttons = [];
 
-  fs.createReadStream(csvFilePath)
-    .pipe(csv())
-    .on('data', (row) => {
-      buttons.push({
-        type: 'text',
-        text: row['Button Text'],
-        action: {
-          type: 'message',
-          label: row['Button Text'],
-          text: row['Response Text'],
-        },
-        color: '#42659a',
-        margin: '10px',
+    fs.createReadStream(csvFilePath)
+      .pipe(csv())
+      .on('data', (row) => {
+        buttons.push({
+          type: 'text',
+          text: row['Button Text'],
+          action: {
+            type: 'message',
+            label: row['Button Text'],
+            text: row['Response Text'],
+          },
+          color: '#42659a',
+          margin: '10px',
+        });
+      })
+      .on('end', () => {
+        const flexMessage = {
+          type: 'flex',
+          altText: 'カフェ利用案内',
+          contents: {
+            type: 'bubble',
+            body: {
+              type: 'box',
+              layout: 'vertical',
+              contents: [
+                {
+                  type: 'text',
+                  text: 'カフェ利用案内',
+                  weight: 'bold',
+                  size: 'xl',
+                },
+                {
+                  type: 'text',
+                  text: '知りたいことをタップしてください。',
+                  wrap: true,
+                },
+              ],
+            },
+            footer: {
+              type: 'box',
+              layout: 'vertical',
+              contents: buttons,
+              paddingTop: '0px',
+            },
+          },
+        };
+
+        resolve(flexMessage); // 成功時に解決
+      })
+      .on('error', (error) => {
+        reject(error); // エラー発生時に拒否
       });
-    })
-    .on('end', () => {
-      const flexMessage = {
-        type: 'flex',
-        altText: 'カフェ利用案内',
-        contents: {
-          type: 'bubble',
-          body: {
-            type: 'box',
-            layout: 'vertical',
-            contents: [
-              {
-                type: 'text',
-                text: 'カフェ利用案内',
-                weight: 'bold',
-                size: 'xl',
-              },
-              {
-                type: 'text',
-                text: '知りたいことをタップしてください。',
-                wrap: true,
-              },
-            ],
-          },
-          footer: {
-            type: 'box',
-            layout: 'vertical',
-            contents: buttons,
-            paddingTop: '0px',
-          },
-        },
-      };
-
-      // 生成したFlexメッセージを返す
-      return flexMessage;
-    });
+  });
 }
+
+module.exports = generateFlexMessage;
