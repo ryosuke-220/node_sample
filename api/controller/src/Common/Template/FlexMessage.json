@@ -1,6 +1,6 @@
 {
     "type": "flex",
-    "altText": "図書館利用案内",
+    "altText": "カフェ利用案内",
     "contents": {
         "type": "bubble",
         "body": {
@@ -9,14 +9,14 @@
             "contents": [
                 {
                     "type": "text",
-                    "text": "図書館利用案内",
+                    "text": "カフェ利用案内",
                     "weight": "bold",
                     "size": "xl",
                     "contents": []
                 },
                 {
                     "type": "text",
-                    "text": "学内の方向けの案内です。知りたいことをタップしてください。",
+                    "text": "知りたいことをタップしてください。",
                     "action": {
                         "type": "message",
                         "label": "action",
@@ -32,7 +32,7 @@
             "contents": [
                 {
                     "type": "text",
-                    "text": "開館時間【授業期間】",
+                    "text": "開店時間",
                     "wrap": true,
                     "action": {
                         "type": "message",
