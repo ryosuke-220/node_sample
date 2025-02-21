@@ -7,7 +7,7 @@ exports.SendMessage = (client, event) => {
     const replyToken = event.replyToken;
 
     if (text === 'チャットボット') {
-        client.replyMessage(replyToken, FlexMessageJson);
+        client.replyMessage(replyToken, generateFlexMessage());
     } else {
         client.replyMessage(replyToken, ErrorMessageJson);
     }
