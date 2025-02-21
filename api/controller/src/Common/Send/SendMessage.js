@@ -7,7 +7,7 @@ exports.SendMessage = async (client, event) => {
 
     if (text === 'チャットボット') {
         try {
-            const flexMessage = await generateFlexMessage(); // 非同期処理を待つ
+            const flexMessage = await generateFlexMessage.generateFlexMessage(); // 非同期処理を待つ
             await client.replyMessage(replyToken, flexMessage);
         } catch (error) {
             console.error('Error generating Flex message:', error);
