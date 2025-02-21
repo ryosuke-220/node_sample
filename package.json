@@ -24,6 +24,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-generator": "^4.16.1",
+    "csv-parser": "^3.0.0",
     "ngrok": "^5.0.0-beta.2"
   }
 }
