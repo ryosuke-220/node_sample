@@ -1,15 +1,19 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
+// CSVファイルのパス
 const csvFilePath = 'data.csv';
 
+// Flexメッセージを生成する関数
 function generateFlexMessage() {
   return new Promise((resolve, reject) => {
     const buttons = [];
 
+    // CSVファイルを読み込み
     fs.createReadStream(csvFilePath)
       .pipe(csv())
       .on('data', (row) => {
+        // CSVの各行からボタンを生成
         buttons.push({
           type: 'text',
           text: row['Button Text'],
@@ -23,6 +27,7 @@ function generateFlexMessage() {
         });
       })
       .on('end', () => {
+        // 全てのボタンが読み込まれた後、Flexメッセージを作成
         const flexMessage = {
           type: 'flex',
           altText: 'カフェ利用案内',
@@ -54,10 +59,12 @@ function generateFlexMessage() {
           },
         };
 
-        resolve(flexMessage); // 成功時に解決
+        // Flexメッセージを返す
+        resolve(flexMessage);
       })
       .on('error', (error) => {
-        reject(error); // エラー発生時に拒否
+        // エラー発生時に拒否
+        reject(error);
       });
   });
 }
