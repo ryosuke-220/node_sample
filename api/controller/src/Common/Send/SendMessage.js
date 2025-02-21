@@ -1,5 +1,4 @@
-const fs = require('fs');
-const csv = require('csv-parser');
+const generateFlexMessage = require('../Template/generateFlexMessage.js');
 
 const ErrorMessageJson = require('../Template/ErrorMessage.json');
 
