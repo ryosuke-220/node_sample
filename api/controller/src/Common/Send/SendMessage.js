@@ -6,10 +6,8 @@ exports.SendMessage = (client, event) => {
     const text = event.message.text;
     const replyToken = event.replyToken;
 
-    if (text === '#案内！') {
+    if (text === 'チャットボット') {
         client.replyMessage(replyToken, FlexMessageJson);
-    } else if (text === '#ヘルプ！') {
-        client.replyMessage(replyToken, ButtonMessageJson);
     } else {
         client.replyMessage(replyToken, ErrorMessageJson);
     }
