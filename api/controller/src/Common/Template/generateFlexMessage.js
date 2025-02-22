@@ -25,7 +25,7 @@ async function generateFlexMessage() {
           action: {
             type: 'message',
             label: buttonText,
-            text: buttonResponse,
+            text: buttonText,
           },
           color: '#42659a',
           margin: '10px',
