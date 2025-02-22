@@ -52,7 +52,7 @@ async function generateFlexMessage() {
                 {
                   type: 'text',
                   text: '知りたいことをタップしてください。',
-                  size: 'lg',
+                  size: 'md',
                   action: {
                         "type": "message",
                         "label": "action",
