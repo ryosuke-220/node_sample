@@ -84,6 +84,7 @@ async function generateFlexMessage() {
 async function getResponseText(userMessage) {
   return new Promise((resolve, reject) => {
     // CSVを再度読み込み、ユーザーのメッセージに一致する応答を検索
+    let found = false;
     fs.createReadStream(csvFilePath)
       .pipe(csv())
       .on('data', (row) => {
