@@ -6,11 +6,11 @@ const csv = require('csv-parser');
 const csvFilePath = path.resolve(__dirname, 'data.csv');
 
 // Flexメッセージを生成する関数
-function generateFlexMessage() {
+async function generateFlexMessage() {
+  const buttons = [];
+  
+  // CSVファイルを読み込む
   return new Promise((resolve, reject) => {
-    const buttons = [];
-
-    // CSVファイルを読み込み
     fs.createReadStream(csvFilePath)
       .pipe(csv())
       .on('data', (row) => {
@@ -80,4 +80,26 @@ function generateFlexMessage() {
   });
 }
 
-module.exports = generateFlexMessage;
+// ユーザーのメッセージに対応するテキストを返す
+async function getResponseText(userMessage) {
+  return new Promise((resolve, reject) => {
+    // CSVを再度読み込み、ユーザーのメッセージに一致する応答を検索
+    fs.createReadStream(csvFilePath)
+      .pipe(csv())
+      .on('data', (row) => {
+        if (row[Object.keys(row)[0]] === userMessage) {
+          // ユーザーのメッセージと一致する場合、2列目の応答を返す
+          resolve(row[Object.keys(row)[1]]);
+        }
+      })
+      .on('end', () => {
+        // 見つからなかった場合はエラーを返す
+        reject('該当する情報がありません');
+      })
+      .on('error', (error) => {
+        reject(error);
+      });
+  });
+}
+
+module.exports = { generateFlexMessage, getResponseText };
