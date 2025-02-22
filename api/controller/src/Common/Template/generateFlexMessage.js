@@ -1,4 +1,7 @@
 const fs = require('fs');
+const path = require('path');
+const csvFilePath = path.resolve(__dirname, 'data.csv');
+
 const csv = require('csv-parser');
 
 // CSVファイルのパス
