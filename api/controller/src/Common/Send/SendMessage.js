@@ -6,7 +6,7 @@ exports.SendMessage = async (client, event) => {
     const replyToken = event.replyToken;
 
     if (text === 'チャットボット') {
-        // ユーザーが「チャットボット」と送信した場合、フレックスメッセージを生成
+        / リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
         try {
           const flexMessage = await generateFlexMessage();
           await client.replyMessage(event.replyToken, flexMessage);
@@ -14,9 +14,9 @@ exports.SendMessage = async (client, event) => {
           console.error('エラーが発生しました: ', error);
         }
     } else {
-        // ユーザーがボタンを押した場合、そのテキストに対応するレスポンステキストを取得
+        // ユーザーがボタンを押した場合、CSVに基づいて回答を取得
         try {
-            const responseText = await getResponseText(event.message.text);
+            const responseText = await getResponseText(text);
             await client.replyMessage(event.replyToken, {
                 type: 'text',
                 text: responseText,
@@ -28,4 +28,23 @@ exports.SendMessage = async (client, event) => {
             });
         };
     }
+}
+
+async function getResponseText(messageText) {
+    return new Promise((resolve, reject) => {
+        const csvFilePath = path.join(__dirname, '../Template/responses.csv'); // CSVのパス
+        const results = {};
+
+        fs.createReadStream(csvFilePath)
+            .pipe(csv())
+            .on('data', (row) => {
+                results[row['質問']] = row['回答']; // CSVの1列目をキー、2列目を値として保存
+            })
+            .on('end', () => {
+                resolve(results[messageText] || "申し訳ありませんが、該当する回答が見つかりません。");
+            })
+            .on('error', (error) => {
+                reject(error);
+            });
+    });
 }
