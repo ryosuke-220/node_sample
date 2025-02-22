@@ -6,7 +6,7 @@ exports.SendMessage = async (client, event) => {
     const replyToken = event.replyToken;
 
     if (text === 'チャットボット') {
-        / リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
+        // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
         try {
           const flexMessage = await generateFlexMessage();
           await client.replyMessage(event.replyToken, flexMessage);
