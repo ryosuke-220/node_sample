@@ -32,34 +32,17 @@ app.post("/webhook", line.middleware(config), (req, res) => {
 const client = new line.Client(config);
 
 async function handleEvent(event) {
-  if (event.type !== 'message' || event.message.type !== 'text') {
+    const text = event.message.text;
+    const replyToken = event.replyToken;
+    
+    if (event.type !== 'message' || event.message.type !== 'text') {
     // テキストメッセージ以外が送信された場合、「対応していない」旨を返す
-    await client.replyMessage(event.replyToken, {
+    await client.replyMessage(replyToken, {
       type: 'text',
-      text: '申し訳ありませんが、テキストメッセージ以外はサポートしていません。',
+      text: '申し訳ありませんが、当該メッセージはサポートしていません。',
     });
-    return Promise.resolve(null);  // 処理を終了
-  } else if (event.message.text === 'チャットボット') {
-    // ユーザーが「チャットボット」と送信した場合、フレックスメッセージを生成
-    try {
-      const flexMessage = await generateFlexMessage();
-      await client.replyMessage(event.replyToken, flexMessage);
-    } catch (error) {
-      console.error('エラーが発生しました: ', error);
-    }
-  } else {
-    // ユーザーがボタンを押した場合、そのテキストに対応するレスポンステキストを取得
-    try {
-      const responseText = await getResponseText(event.message.text);
-      await client.replyMessage(event.replyToken, {
-        type: 'text',
-        text: responseText,
-      });
-    } catch (error) {
-      await client.replyMessage(event.replyToken, {
-        type: 'text',
-        text: '該当する情報がありません。',
-      });
+  } else [
+      await client.replyMessage(replyToken, SendMessage.SendMessage());
     }
   }
 }
