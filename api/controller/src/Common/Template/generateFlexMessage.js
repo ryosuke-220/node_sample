@@ -86,7 +86,7 @@ async function getResponseText(userMessage) {
     // CSVを再度読み込み、ユーザーのメッセージに一致する応答を検索
     let found = false;
     fs.createReadStream(csvFilePath)
-      .pipe(csv())
+      .pipe(csv({ header: false }))
       .on('data', (row) => {
         if (row[Object.keys(row)[0]] === userMessage) {
           // ユーザーのメッセージと一致する場合、2列目の応答を返す
