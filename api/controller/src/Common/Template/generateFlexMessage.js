@@ -12,7 +12,7 @@ async function generateFlexMessage() {
   // CSVファイルを読み込む
   return new Promise((resolve, reject) => {
     fs.createReadStream(csvFilePath)
-      .pipe(csv({ header: false }))
+      .pipe(csv({ headers: false }))
       .on('data', (row) => {
         // CSVの各行からボタンを生成
         const buttonText = row[Object.keys(row)[0]]; // 1列目（例: 開店時間, 定休日）
@@ -87,7 +87,7 @@ async function getResponseText(userMessage) {
     // CSVを再度読み込み、ユーザーのメッセージに一致する応答を検索
     let found = false;
     fs.createReadStream(csvFilePath)
-      .pipe(csv({ header: false }))
+      .pipe(csv({ headers: false }))
       .on('data', (row) => {
         if (row[Object.keys(row)[0]] === userMessage) {
           // ユーザーのメッセージと一致する場合、2列目の応答を返す
