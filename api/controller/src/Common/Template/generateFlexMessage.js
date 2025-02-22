@@ -15,13 +15,17 @@ function generateFlexMessage() {
       .pipe(csv())
       .on('data', (row) => {
         // CSVの各行からボタンを生成
+        const buttonText = Object.keys(row)[0]; // 1列目（例: 開店時間, 定休日）
+        const buttonResponse = row[buttonText]; // 2列目（例: 10:00-18:00, 火、土）
+
+        // CSVの各行からボタンを生成
         buttons.push({
           type: 'text',
-          text: row['Button Text'],
+          text: buttonText,
           action: {
             type: 'message',
-            label: row['Button Text'],
-            text: row['Response Text'],
+            label: buttonText,
+            text: buttonResponse,
           },
           color: '#42659a',
           margin: '10px',
@@ -43,10 +47,16 @@ function generateFlexMessage() {
                   text: 'カフェ利用案内',
                   weight: 'bold',
                   size: 'xl',
+                  contents: []
                 },
                 {
                   type: 'text',
                   text: '知りたいことをタップしてください。',
+                  action: {
+                        "type": "message",
+                        "label": "action",
+                        "text": "hello"
+                  },
                   wrap: true,
                 },
               ],
