@@ -32,8 +32,6 @@ app.post("/webhook", line.middleware(config), (req, res) => {
 const client = new line.Client(config);
 
 async function handleEvent(event) {
-    console.log(event.type);
-    
     const text = event.message.text;
     const replyToken = event.replyToken;
     
