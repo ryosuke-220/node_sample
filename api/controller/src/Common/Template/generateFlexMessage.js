@@ -12,7 +12,7 @@ async function generateFlexMessage() {
   // CSVファイルを読み込む
   return new Promise((resolve, reject) => {
     fs.createReadStream(csvFilePath)
-      .pipe(csv())
+      .pipe(csv({ header: false }))
       .on('data', (row) => {
         // CSVの各行からボタンを生成
         const buttonText = row[Object.keys(row)[0]]; // 1列目（例: 開店時間, 定休日）
