@@ -15,8 +15,8 @@ function generateFlexMessage() {
       .pipe(csv())
       .on('data', (row) => {
         // CSVの各行からボタンを生成
-        const buttonText = Object.keys(row)[0]; // 1列目（例: 開店時間, 定休日）
-        const buttonResponse = row[buttonText]; // 2列目（例: 10:00-18:00, 火、土）
+        const buttonText = row[Object.keys(row)[0]]; // 1列目（例: 開店時間, 定休日）
+        const buttonResponse = row[Object.keys(row)[1]]; // 2列目（例: 10:00-18:00, 火、土）
 
         // CSVの各行からボタンを生成
         buttons.push({
