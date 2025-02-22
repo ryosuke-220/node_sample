@@ -29,22 +29,3 @@ exports.SendMessage = async (client, event) => {
         };
     }
 }
-
-async function getResponseText(messageText) {
-    return new Promise((resolve, reject) => {
-        const csvFilePath = path.join(__dirname, '../Template/responses.csv'); // CSVのパス
-        const results = {};
-
-        fs.createReadStream(csvFilePath)
-            .pipe(csv())
-            .on('data', (row) => {
-                results[row['質問']] = row['回答']; // CSVの1列目をキー、2列目を値として保存
-            })
-            .on('end', () => {
-                resolve(results[messageText] || "申し訳ありませんが、該当する回答が見つかりません。");
-            })
-            .on('error', (error) => {
-                reject(error);
-            });
-    });
-}
