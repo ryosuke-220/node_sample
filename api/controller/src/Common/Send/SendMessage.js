@@ -18,12 +18,14 @@ exports.SendMessage = async (client, event) => {
         try {
             const responseText = await getResponseText(event.message.text);
             await client.replyMessage(event.replyToken, {
-            type: 'text',
-            text: responseText,
-        });
-    } catch (error) {
-        await client.replyMessage(event.replyToken, {
-        type: 'text',
-        text: '申し訳ありませんが、当該メッセージははサポートしていません。',
-      });
-};
+                type: 'text',
+                text: responseText,
+            });
+        } catch (error) {
+            await client.replyMessage(event.replyToken, {
+                type: 'text',
+                text: '申し訳ありませんが、当該メッセージははサポートしていません。',
+            });
+        };
+    }
+}
