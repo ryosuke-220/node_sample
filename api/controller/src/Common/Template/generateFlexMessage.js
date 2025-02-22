@@ -46,12 +46,13 @@ async function generateFlexMessage() {
                   type: 'text',
                   text: 'カフェ利用案内',
                   weight: 'bold',
-                  size: 'xl',
+                  size: 'lg',
                   contents: []
                 },
                 {
                   type: 'text',
                   text: '知りたいことをタップしてください。',
+                  size: 'lg'
                   action: {
                         "type": "message",
                         "label": "action",
