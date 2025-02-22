@@ -36,15 +36,14 @@ async function handleEvent(event) {
     const replyToken = event.replyToken;
     
     if (event.type !== 'message' || event.message.type !== 'text') {
-    // テキストメッセージ以外が送信された場合、「対応していない」旨を返す
-    await client.replyMessage(replyToken, {
-      type: 'text',
-      text: '申し訳ありませんが、当該メッセージはサポートしていません。',
-    });
-  } else {
-      await client.replyMessage(replyToken, SendMessage.SendMessage());
+        // テキストメッセージ以外が送信された場合、「対応していない」旨を返す
+        await client.replyMessage(replyToken, {
+          type: 'text',
+          text: '申し訳ありませんが、当該メッセージはサポートしていません。',
+        });
+    } else {
+        await client.replyMessage(replyToken, SendMessage.SendMessage());
     }
-  }
 }
 
 app.listen(port, '0.0.0.0', () => {
