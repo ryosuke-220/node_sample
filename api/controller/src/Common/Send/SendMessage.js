@@ -6,14 +6,24 @@ exports.SendMessage = async (client, event) => {
     const replyToken = event.replyToken;
 
     if (text === 'チャットボット') {
+        // ユーザーが「チャットボット」と送信した場合、フレックスメッセージを生成
         try {
-            const flexMessage = await generateFlexMessage(); // 非同期処理を待つ
-            await client.replyMessage(replyToken, flexMessage);
+          const flexMessage = await generateFlexMessage();
+          await client.replyMessage(event.replyToken, flexMessage);
         } catch (error) {
-            console.error('Error generating Flex message:', error);
-            await client.replyMessage(replyToken, { type: 'text', text: 'エラーが発生しました。' });
+          console.error('エラーが発生しました: ', error);
         }
     } else {
-        await client.replyMessage(replyToken, ErrorMessageJson);
-    }
+        // ユーザーがボタンを押した場合、そのテキストに対応するレスポンステキストを取得
+        try {
+            const responseText = await getResponseText(event.message.text);
+            await client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: responseText,
+        });
+    } catch (error) {
+        await client.replyMessage(event.replyToken, {
+        type: 'text',
+        text: '申し訳ありませんが、当該メッセージははサポートしていません。',
+      });
 };
