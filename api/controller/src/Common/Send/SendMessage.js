@@ -1,4 +1,4 @@
-const generateFlexMessage = require('../Template/generateFlexMessage');
+const { generateFlexMessage, getResponseText } = require('../Template/generateFlexMessage');
 const ErrorMessageJson = require('../Template/ErrorMessage.json');
 
 exports.SendMessage = async (client, event) => {
