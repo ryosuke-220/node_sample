@@ -32,6 +32,8 @@ app.post("/webhook", line.middleware(config), (req, res) => {
 const client = new line.Client(config);
 
 async function handleEvent(event) {
+    console.log("recieve event:",JSON.stringfy(event, null, 2));
+    
     const text = event.message.text;
     const replyToken = event.replyToken;
     
@@ -42,7 +44,7 @@ async function handleEvent(event) {
           text: '申し訳ありませんが、当該メッセージはサポートしていません。',
         });
     } else {
-        await client.replyMessage(replyToken, SendMessage.SendMessage());
+        await SendMessage.SendMessage(client, event);
     }
 }
 
