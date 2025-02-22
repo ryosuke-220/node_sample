@@ -2,7 +2,7 @@ const fs = require('fs');
 const csv = require('csv-parser');
 
 // CSVファイルのパス
-const csvFilePath = 'data.csv';
+const csvFilePath = path.join(__dirname, 'data.csv');
 
 // Flexメッセージを生成する関数
 function generateFlexMessage() {
