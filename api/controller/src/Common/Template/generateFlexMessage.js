@@ -89,12 +89,15 @@ async function getResponseText(userMessage) {
       .on('data', (row) => {
         if (row[Object.keys(row)[0]] === userMessage) {
           // ユーザーのメッセージと一致する場合、2列目の応答を返す
+          found = true;
           resolve(row[Object.keys(row)[1]]);
         }
       })
       .on('end', () => {
         // 見つからなかった場合はエラーを返す
-        reject('該当する情報がありません');
+        if (!found) {
+          reject('該当する情報がありません');
+        }  
       })
       .on('error', (error) => {
         reject(error);
