@@ -4,7 +4,7 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 require("dotenv").config();
 
-const setupRichMenu = require('./setupRichMenu'); 
+//const setupRichMenu = require('./setupRichMenu'); 
 const SendMessage = require('../src/Common/Send/SendMessage');
 
 const config = {
