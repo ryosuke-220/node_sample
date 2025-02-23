@@ -16,7 +16,7 @@ const app = express();
 const port = process.env.PORT || 10000;
 
 // サーバー起動時にリッチメニューをセットアップ
-setupRichMenu().then(() => console.log(" リッチメニュー設定完了！")).catch(console.error);
+//setupRichMenu().then(() => console.log(" リッチメニュー設定完了！")).catch(console.error);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 app.post("/webhook", line.middleware(config), (req, res) => {
     Promise
         .all(req.body.events.map(handleEvent))
+        console.log(event.sourse.userId);
         .then((result) => res.json(result))
         .catch((err) => {
             console.error(err);
