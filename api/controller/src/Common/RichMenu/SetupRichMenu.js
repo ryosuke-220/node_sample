@@ -45,7 +45,7 @@ async function createRichMenu(richMenuData) {
         console.log("リッチメニュー作成成功！ID:", richMenuId);
         return richMenuId;
     } catch (error) {
-        console.error("リッチメニュー作成エラー:", error.message);
+        console.error("リッチメニュー作成エラー:", error.response ? error.response.data : error.message);
         return null;
     }
 }
