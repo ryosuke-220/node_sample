@@ -19,7 +19,7 @@ const port = process.env.PORT || 10000;
 (async () => {
     try {
         await setupRichMenu();
-        console.log("リッチメニュー設定完了！");
+        console.log("リッチメニュー設定完了");
     } catch (error) {
         console.error("リッチメニュー設定エラー:", error);
     }
