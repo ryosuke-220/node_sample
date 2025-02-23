@@ -4,8 +4,8 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 require("dotenv").config();
 
-const SetupRichMenu = require('../RichMenu/setupRichMenu'); 
-const SendMessage = require('../src/Common/Send/SendMessage');
+const setupRichMenu = require('../RichMenu/setupRichMenu'); 
+const sendMessage = require('../src/Common/Send/SendMessage');
 
 const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
@@ -16,7 +16,7 @@ const app = express();
 const port = process.env.PORT || 10000;
 
 // サーバー起動時にリッチメニューをセットアップ
-SetupRichMenu.SetupRichMenu().then(() => console.log(" リッチメニュー設定完了！")).catch(console.error);
+setupRichMenu.setupRichMenu().then(() => console.log(" リッチメニュー設定完了！")).catch(console.error);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -48,7 +48,7 @@ async function handleEvent(event) {
           text: '申し訳ありませんが、当該メッセージはサポートしていません。',
         });
     } else {
-        await SendMessage.SendMessage(client, event);
+        await sendMessage.sendMessage(client, event);
     }
 }
 
