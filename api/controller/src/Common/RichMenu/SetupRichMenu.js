@@ -2,14 +2,11 @@ require('dotenv').config();
 const fs = require("fs");
 const line = require('@line/bot-sdk');
 
-const config = {
-    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-    channelSecret: process.env.CHANNEL_SECRET
-};
+const { config, client } = require('../config');
+
 const userId = process.env.USER_ID;
 const imagePath = process.env.IMAGE_PATH;
 
-const client = new line.Client(config);
 
 const richMenuData = {
     size: { width: 2500, height: 1686 },
