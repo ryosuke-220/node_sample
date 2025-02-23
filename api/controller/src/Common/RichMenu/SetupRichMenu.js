@@ -51,10 +51,10 @@ async function createRichMenu(richMenuData) {
 }
 
 // 画像アップロード
-async function uploadRichMenuImage(richMenuId) {
+async function setRichMenuImage(richMenuId) {
     try {
         const imageBuffer = fs.readFileSync(imagePath);
-        await client.setRichMenuImage(richMenuId, imageBuffer, "image/png");
+        await client.setRichMenuImage(richMenuId, imageBuffer);
         console.log("画像アップロード成功！");
     } catch (error) {
         console.error("画像アップロードエラー:", error.message);
@@ -62,12 +62,12 @@ async function uploadRichMenuImage(richMenuId) {
 }
 
 // ユーザーにリッチメニューを適用
-async function linkRichMenu(richMenuId) {
+async function setDefaultRichMenu(richMenuId) {
     try {
-        await client.linkRichMenuToUser(userId, richMenuId);
-        console.log("リッチメニューをユーザーに適用しました！");
+        await client.setDefaultRichMenu(richMenuId);
+        console.log("リッチメニューを適用しました！");
     } catch (error) {
-        console.error("ユーザー適用エラー:", error.message);
+        console.error("リッチメニュー適用エラー:", error.message);
     }
 }
 
@@ -75,8 +75,8 @@ async function linkRichMenu(richMenuId) {
 async function setupRichMenu() {
     const richMenuId = await createRichMenu(richMenuData);
     if (richMenuId) {
-        await uploadRichMenuImage(richMenuId);
-        await linkRichMenuToUser(richMenuId);
+        await setRichMenuImage(richMenuId);
+        await setDefaultRichMenu(richMenuId);
     }
 }
 
