@@ -15,7 +15,7 @@ const richMenuData = {
         // 上段
         {
             bounds: { x: 0, y: 0, width: 833, height: 843 },
-            action: { type: "url", url="https://rispace.conohawing.com/home.php" }
+            action: { type: "url", url: "https://rispace.conohawing.com/home.php" }
         },
         {
             bounds: { x: 833, y: 0, width: 833, height: 843 },
@@ -23,7 +23,7 @@ const richMenuData = {
         },
         {
             bounds: { x: 1666, y: 0, width: 834, height: 843 },
-            action: { type: "url", data: "https://u.lin.ee/vyKGU9j" }
+            action: { type: "url", url: "https://u.lin.ee/vyKGU9j" }
         },
         // 下段
         {
