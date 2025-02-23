@@ -57,7 +57,7 @@ async function createRichMenu() {
 async function uploadRichMenuImage() {
     try {
         const imageBuffer = fs.readFileSync(imagePath);
-        await client.setRichMenuImage(richMenuId, imageBuffer, "image/jpeg");
+        await client.setRichMenuImage(richMenuId, imageBuffer, "image/png");
         console.log("画像アップロード成功！");
     } catch (error) {
         console.error("画像アップロードエラー:", error.message);
