@@ -1,7 +1,7 @@
 const { generateFlexMessage, getResponseText } = require('../Template/generateFlexMessage');
 const ErrorMessageJson = require('../Template/ErrorMessage.json');
 
-exports.SendMessage = async (client, event) => {
+exports.sendMessage = async (client, event) => {
     const text = event.message.text;
     const replyToken = event.replyToken;
 
