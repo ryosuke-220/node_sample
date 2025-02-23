@@ -2,9 +2,9 @@ require('dotenv').config();
 const axios = require("axios");
 const fs = require("fs");
 
-const LINE_ACCESS_TOKEN = process.env.CHANNEL_ACCESS_TOKEN;
-const USER_ID = process.env.USER_ID;
-const IMAGE_PATH = process.env.IMAGE_PATH;
+const channelAccessToken = process.env.CHANNEL_ACCESS_TOKEN;
+const userId = process.env.USER_ID;
+const imagePath = process.env.IMAGE_PATH;
 
 // リッチメニュー作成関数
 async function createRichMenu() {
@@ -46,7 +46,7 @@ async function createRichMenu() {
     try {
         const response = await axios.post("https://api.line.me/v2/bot/richmenu", richMenuData, {
             headers: {
-                Authorization: `Bearer ${LINE_ACCESS_TOKEN}`,
+                Authorization: `Bearer ${channelAccessToken}`,
                 "Content-Type": "application/json"
             }
         });
@@ -60,10 +60,10 @@ async function createRichMenu() {
 // 画像アップロード
 async function uploadRichMenuImage(richMenuId) {
     try {
-        const imageData = fs.readFileSync(IMAGE_PATH);
+        const imageData = fs.readFileSync(imagePath);
         await axios.post(`https://api.line.me/v2/bot/richmenu/${richMenuId}/content`, imageData, {
             headers: {
-                Authorization: `Bearer ${LINE_ACCESS_TOKEN}`,
+                Authorization: `Bearer ${channelAccessToken}`,
                 "Content-Type": "image/jpeg"
             }
         });
@@ -75,9 +75,9 @@ async function uploadRichMenuImage(richMenuId) {
 // ユーザーにリッチメニューを適用
 async function linkRichMenuToUser(richMenuId) {
     try {
-        await axios.post(`https://api.line.me/v2/bot/user/${USER_ID}/richmenu/${richMenuId}`, {}, {
+        await axios.post(`https://api.line.me/v2/bot/user/${userId}/richmenu/${richMenuId}`, {}, {
             headers: {
-                Authorization: `Bearer ${LINE_ACCESS_TOKEN}`
+                Authorization: `Bearer ${channelAccessToken}`
             }
         });
     } catch (error) {
