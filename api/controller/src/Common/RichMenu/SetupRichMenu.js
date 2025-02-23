@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { client } = require('../../config');
 const userId = process.env.USER_ID;
-const imagePath = process.env.IMAGE_PATH;
+const imagePath = 'RichMenu.png';
 
 const richMenuData = {
     size: { width: 2500, height: 1686 },
