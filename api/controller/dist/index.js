@@ -15,13 +15,13 @@ const config = {
 const app = express();
 const port = process.env.PORT || 10000;
 
-// ✅ 非同期でリッチメニューをセットアップ
+// 非同期でリッチメニューをセットアップ
 (async () => {
     try {
         await setupRichMenu();
-        console.log("✅ リッチメニュー設定完了！");
+        console.log("リッチメニュー設定完了！");
     } catch (error) {
-        console.error("❌ リッチメニュー設定エラー:", error);
+        console.error("リッチメニュー設定エラー:", error);
     }
 })();
 
