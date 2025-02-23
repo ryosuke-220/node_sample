@@ -23,13 +23,16 @@ app.get('/', (req, res) => {
 });
 
 app.post("/webhook", line.middleware(config), (req, res) => {
-    Promise
-        .all(req.body.events.map(handleEvent))
-        .then((result) => res.json(result))
-        .catch((err) => {
-            console.error(err);
-            res.status(500).end();
-        });
+    Promise.all(req.body.events.map(async (event) => {
+        if (event.source && event.source.userId) {
+            console.log("あなたのUser ID:", event.source.userId);
+        }
+    }))
+    .then(() => res.status(200).end())
+    .catch((err) => {
+        console.error(err);
+        res.status(500).end();
+    });
 });
 
 const client = new line.Client(config);
