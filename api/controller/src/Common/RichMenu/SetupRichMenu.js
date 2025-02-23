@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { client } = require('../config');
+const { client } = require('../../config');
 const userId = process.env.USER_ID;
 const imagePath = process.env.IMAGE_PATH;
 
