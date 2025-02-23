@@ -7,10 +7,7 @@ require("dotenv").config();
 const setupRichMenu = require('../src/Common/RichMenu/SetupRichMenu'); 
 const sendMessage = require('../src/Common/Send/SendMessage');
 
-const config = {
-    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-    channelSecret: process.env.CHANNEL_SECRET
-};
+const { config, client } = require('../src/config');
 
 const app = express();
 const port = process.env.PORT || 10000;
@@ -41,8 +38,6 @@ app.post("/webhook", line.middleware(config), (req, res) => {
         res.status(500).end();
     });
 });
-
-const client = new line.Client(config);
 
 async function handleEvent(event) {
     try {
