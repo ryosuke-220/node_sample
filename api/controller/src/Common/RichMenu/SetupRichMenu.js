@@ -1,4 +1,5 @@
-const { config, client } = require('../config');
+const fs = require("fs");
+const { client } = require('../config');
 const userId = process.env.USER_ID;
 const imagePath = process.env.IMAGE_PATH;
 
@@ -50,7 +51,7 @@ async function createRichMenu() {
 }
 
 // 画像アップロード
-async function uploadRichMenuImage() {
+async function uploadRichMenuImage(richMenuId) {
     try {
         const imageBuffer = fs.readFileSync(imagePath);
         await client.setRichMenuImage(richMenuId, imageBuffer, "image/png");
@@ -61,7 +62,7 @@ async function uploadRichMenuImage() {
 }
 
 // ユーザーにリッチメニューを適用
-async function linkRichMenu() {
+async function linkRichMenu(richMenuId) {
     try {
         await client.linkRichMenuToUser(userId, richMenuId);
         console.log("リッチメニューをユーザーに適用しました！");
