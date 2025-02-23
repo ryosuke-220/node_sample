@@ -68,7 +68,7 @@ async function setDefaultRichMenu(richMenuId) {
         await client.setDefaultRichMenu(richMenuId);
         console.log("リッチメニューを適用しました！");
     } catch (error) {
-        console.error("リッチメニュー適用エラー:", error.response ? JSON.stringify(error.response.data, null, 2) : error.message););
+        console.error("リッチメニュー適用エラー:", error.response ? JSON.stringify(error.response.data, null, 2) : error.message);
     }
 }
 
