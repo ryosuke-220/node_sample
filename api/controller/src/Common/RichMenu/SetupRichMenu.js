@@ -8,34 +8,7 @@ const richMenuData = {
     selected: true,
     name: "Main Menu",
     chatBarText: "メニューを開く",
-    areas: [
-        // 上段
-        {
-            bounds: { x: 0, y: 0, width: 833, height: 843 },
-            action: { type: "url", url: "https://rispace.conohawing.com/home.php" }
-        },
-        {
-            bounds: { x: 833, y: 0, width: 833, height: 843 },
-            action: { type: "postback", data: "action=contact" }
-        },
-        {
-            bounds: { x: 1666, y: 0, width: 834, height: 843 },
-            action: { type: "url", url: "https://u.lin.ee/vyKGU9j" }
-        },
-        // 下段
-        {
-            bounds: { x: 0, y: 843, width: 833, height: 843 },
-            action: { type: "postback", data: "action=reserve" }
-        },
-        {
-            bounds: { x: 833, y: 843, width: 833, height: 843 },
-            action: { type: "postback", data: "action=chatbot" }
-        },
-        {
-            bounds: { x: 1666, y: 843, width: 834, height: 843 },
-            action: { type: "url", url: "https://lin.ee/CuevDnt" }
-        }
-    ]
+    areas: []
 };
 
 // リッチメニュー作成関数
