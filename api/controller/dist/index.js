@@ -16,7 +16,7 @@ const app = express();
 const port = process.env.PORT || 10000;
 
 // サーバー起動時にリッチメニューをセットアップ
-setupRichMenu().then(() => console.log(" リッチメニュー設定完了！")).catch(console.error);
+SetupRichMenu.SetupRichMenu().then(() => console.log(" リッチメニュー設定完了！")).catch(console.error);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
