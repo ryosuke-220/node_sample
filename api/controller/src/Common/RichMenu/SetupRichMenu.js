@@ -49,7 +49,7 @@ const richMenuData = {
 // リッチメニュー作成関数
 async function createRichMenu() {
     try {
-        const richMenuId = await client.createRichMenu(richMenuConfig);
+        const richMenuId = await client.createRichMenu(richMenuData);
         console.log("リッチメニュー作成成功！ID:", richMenuId);
         return richMenuId;
     } catch (error) {
