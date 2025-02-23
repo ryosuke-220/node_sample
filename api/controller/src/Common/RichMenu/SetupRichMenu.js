@@ -39,7 +39,7 @@ const richMenuData = {
 };
 
 // リッチメニュー作成関数
-async function createRichMenu() {
+async function createRichMenu(richMenuData) {
     try {
         const richMenuId = await client.createRichMenu(richMenuData);
         console.log("リッチメニュー作成成功！ID:", richMenuId);
@@ -73,7 +73,7 @@ async function linkRichMenu(richMenuId) {
 
 // リッチメニューのセットアップを実行する関数
 async function setupRichMenu() {
-    const richMenuId = await createRichMenu();
+    const richMenuId = await createRichMenu(richMenuData);
     if (richMenuId) {
         await uploadRichMenuImage(richMenuId);
         await linkRichMenuToUser(richMenuId);
