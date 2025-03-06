@@ -17,7 +17,7 @@ const richMenuData = {
         },
         {
             bounds: { x: 833, y: 0, width: 833, height: 843 },
-            action: { type: "postback", data: "action=contact" }
+            action: { type: "uri", uri: "https://rispace.conohawing.com/contact" }
         },
         {
             bounds: { x: 1666, y: 0, width: 834, height: 843 },
