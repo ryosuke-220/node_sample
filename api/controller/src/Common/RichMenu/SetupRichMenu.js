@@ -73,8 +73,9 @@ async function setDefaultRichMenu(richMenuId) {
 }
 
 // リッチメニューのセットアップを実行する関数
-async function setupRichMenu(richMenuId) {
+async function setupRichMenu(richMenuData, richMenuId) {
     if (richMenuId) {
+        await createRichMenu(richMenuData);
         await setRichMenuImage(richMenuId);
         await setDefaultRichMenu(richMenuId);
     }
