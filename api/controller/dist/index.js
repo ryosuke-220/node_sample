@@ -41,7 +41,7 @@ async function handleEvent(event) {
                 type: 'text',
                 text: '申し訳ありませんが、当該メッセージはサポートしていません。',
             });
-        }}else {
+        }else {
             await sendMessage.sendMessage(client, event);
         }
     } catch (error) {
