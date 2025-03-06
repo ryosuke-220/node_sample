@@ -4,6 +4,7 @@ const line = require("@line/bot-sdk");
 const express = require('express');
 const setupRichMenu = require('../src/Common/RichMenu/SetupRichMenu'); 
 const sendMessage = require('../src/Common/Send/SendMessage');
+const { generateFlexMessage, getResponseText } = require('../Template/generateFlexMessage');
 
 const { config, client } = require('../src/config');
 
