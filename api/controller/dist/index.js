@@ -41,13 +41,7 @@ async function handleEvent(event) {
                 type: 'text',
                 text: '申し訳ありませんが、当該メッセージはサポートしていません。',
             });
-        } else if (event.type === 'message' && event.message.type === 'location') {
-            const { latitude, longitude } = event.message;
-            // 位置情報を基にデータを取得
-            const data = fetchDataBasedOnLocation(latitude, longitude);
-            const flexMessage = createFlexMessage(data);
-            return client.replyMessage(event.replyToken, flexMessage);
-        } else {
+        }}else {
             await sendMessage.sendMessage(client, event);
         }
     } catch (error) {
