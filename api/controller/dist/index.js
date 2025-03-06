@@ -42,7 +42,7 @@ async function handleEvent(event) {
                 type: 'text',
                 text: '申し訳ありませんが、当該メッセージはサポートしていません。',
             });
-        } else if (event.type === 'post') {
+        } else if (event.type === 'postback') {
             const data = event.postback.data;
             if (data === 'action=chatbot') {
                 // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
