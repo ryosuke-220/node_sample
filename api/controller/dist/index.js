@@ -37,12 +37,7 @@ app.post("/webhook", line.middleware(config), (req, res) => {
 
 async function handleEvent(event) {
     try {
-        if (event.type !== 'message' || event.message.type !== 'text') {
-            await client.replyMessage(event.replyToken, {
-                type: 'text',
-                text: '申し訳ありませんが、当該メッセージはサポートしていません。',
-            });
-        } else if (event.type === 'postback') {
+        if (event.type === 'postback') {
             const data = event.postback.data;
             if (data === 'action=chatbot') {
                 // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
@@ -53,7 +48,12 @@ async function handleEvent(event) {
                   console.error('エラーが発生しました: ', error);
                 }
             }
-        } else {
+        } else if (event.type !== 'message' || event.message.type !== 'text') {
+            await client.replyMessage(event.replyToken, {
+                type: 'text',
+                text: '申し訳ありませんが、当該メッセージはサポートしていません。',
+            });
+        } else  {
             await sendMessage.sendMessage(client, event);
         }
     } catch (error) {
