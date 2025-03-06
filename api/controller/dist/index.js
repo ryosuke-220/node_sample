@@ -43,7 +43,7 @@ async function handleEvent(event) {
                 // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
                 try {
                   const flexMessage = await generateFlexMessage();
-                  await client.replyMessage(replyToken, flexMessage);
+                  await client.replyMessage(event.replyToken, flexMessage);
                 } catch (error) {
                   console.error('エラーが発生しました: ', error);
                 }
