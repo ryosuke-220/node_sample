@@ -41,7 +41,18 @@ async function handleEvent(event) {
                 type: 'text',
                 text: '申し訳ありませんが、当該メッセージはサポートしていません。',
             });
-        }else {
+        } else if (event.type === 'post') {
+            const data = event.postback.data;
+            if (data === 'action=chatbot') {
+                // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
+                try {
+                  const flexMessage = await generateFlexMessage();
+                  await client.replyMessage(replyToken, flexMessage);
+                } catch (error) {
+                  console.error('エラーが発生しました: ', error);
+                }
+            }
+        } else {
             await sendMessage.sendMessage(client, event);
         }
     } catch (error) {
