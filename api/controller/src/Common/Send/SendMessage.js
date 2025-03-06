@@ -2,10 +2,11 @@ const { generateFlexMessage, getResponseText } = require('../Template/generateFl
 const ErrorMessageJson = require('../Template/ErrorMessage.json');
 
 exports.sendMessage = async (client, event) => {
+    const type = event.type;
     const text = event.message.text;
     const replyToken = event.replyToken;
 
-    if (text === 'チャットボット') {
+    if (type === 'post' && text === 'チャットボット') {
         // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
         try {
           const flexMessage = await generateFlexMessage();
