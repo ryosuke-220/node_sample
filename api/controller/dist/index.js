@@ -48,13 +48,13 @@ async function handleEvent(event) {
                   console.error('エラーが発生しました: ', error);
                 }
             }
-        } else if (event.type !== 'message' || event.message.type !== 'text') {
+        } else if (event.type === 'message' || event.message.type === 'text') {
+            await sendMessage.sendMessage(client, event);
+        } else  {
             await client.replyMessage(event.replyToken, {
                 type: 'text',
                 text: '申し訳ありませんが、当該メッセージはサポートしていません。',
             });
-        } else  {
-            await sendMessage.sendMessage(client, event);
         }
     } catch (error) {
         console.error("メッセージ処理中のエラー:", error);
