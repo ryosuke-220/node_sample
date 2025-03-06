@@ -6,13 +6,16 @@ exports.sendMessage = async (client, event) => {
     const text = event.message.text;
     const replyToken = event.replyToken;
 
-    if (type === 'post' && text === 'チャットボット') {
-        // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
-        try {
-          const flexMessage = await generateFlexMessage();
-          await client.replyMessage(replyToken, flexMessage);
-        } catch (error) {
-          console.error('エラーが発生しました: ', error);
+    if (type === 'post') {
+        const data = event.postback.data;
+        if (data === 'action=chatbot') {
+            // リッチメニューの「チャットボット」ボタンが押された場合、フレックスメッセージを生成
+            try {
+              const flexMessage = await generateFlexMessage();
+              await client.replyMessage(replyToken, flexMessage);
+            } catch (error) {
+              console.error('エラーが発生しました: ', error);
+            }
         }
     } else {
         // ユーザーがボタンを押した場合、CSVに基づいて回答を取得
